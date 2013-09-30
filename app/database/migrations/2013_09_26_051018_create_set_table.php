@@ -13,7 +13,7 @@ class CreateSetTable extends Migration {
 	{
 		Schema::create('sets', function($table){
 			$table->increments('id');
-			$table->string('test_id');
+			$table->string('exam_id');
 			$table->string('name');
 			$table->timestamps();
 		});
