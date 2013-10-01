@@ -15,7 +15,7 @@
 				<th width="225px">Exam Title</th>
 				<th width="225px">Passing Score</th>
 				<th width="225px">Duration</th>
-				<th width="15px">view</th>
+				<th width="15px">View</th>
 				<th width="15px">Settings</th>
 				<th width="15px">Delete</th>
 			</tr>
@@ -27,7 +27,7 @@
 				<td>{{ $list->passing_score }} %</td>
 				<td>{{ $list->duration }} mins</td>
 				<td style="text-align: center;">
-					<a href=""><img class="view_btn" style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/view.png' }} /></a>
+					<a href="{{ Request::root() . '/view_exam/' . $list->id}}"><img class="view_btn" style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/view.png' }} /></a>
 				</td>
 				<td style="text-align: center;">
 					<a href="{{ Request::root() . '/exam_settings/' . $list->id}}"><img class="setting_btn" style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/setting.png' }} /></a>

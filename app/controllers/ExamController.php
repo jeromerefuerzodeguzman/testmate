@@ -65,4 +65,84 @@ class ExamController extends BaseController {
 		}
 
 	}
+
+	public function view_exam($id) {
+		$exam = Exam::find($id);
+		$sets = Set::where('exam_id', '=', $id)->get(array('id','name'));
+		$questions = Question::where('exam_id', '=', $id)->get();
+
+		return View::make('exams.view_exam')
+				->with('sets', $sets)
+				->with('questions', $questions)
+				->with('exam', $exam);
+	}
+
+
+	public function add_set_form($id) {
+		$exam = Exam::find($id);
+
+		return View::make('exams.add_set')
+				->with('exam', $exam);
+	}
+
+	public function add_set() {
+		$validation = Set::validate_new_set(Input::all());
+
+		if($validation->fails()) {
+			$failed = $validation->failed();
+			return  Redirect::to('add_set_form/' . Input::get('exam_id'))->with('error_index', $failed)->withErrors($validation)->withInput();
+		} else {
+			Set::create(array(
+					'exam_id' => Input::get('exam_id'),
+					'name' => Input::get('name')
+				));
+
+			return Redirect::to('view_exam/'. Input::get('exam_id'))->with('message', 'Successfully Create');
+		}
+
+	}
+
+	public function add_question_form($id) {
+		$exam = Exam::find($id);
+		$set_array = Set::where('exam_id', '=', $id)->get(array('id','name'));
+		$type_array = Questiontype::all();
+
+		$sets = parent::convert_to_array($set_array);
+		$types = parent::convert_to_array($type_array);
+
+		return View::make('exams.add_question')
+				->with('exam', $exam)
+				->with('sets', $sets)
+				->with('types', $types);
+	}
+	
+
+	public function add_question() {
+		$validation = Question::validate_new_question(Input::all());
+
+		if($validation->fails()) {
+			$failed = $validation->failed();
+			return  Redirect::to('add_question_form/' . Input::get('exam_id'))->with('error_index', $failed)->withErrors($validation)->withInput();
+		} else {
+			Question::create(array(
+					'exam_id' => Input::get('exam_id'),
+					'set_id' => Input::get('set_id'),
+					'type_id' => Input::get('type_id'),
+					'question' => Input::get('question')
+				));
+
+			return Redirect::to('view_exam/'. Input::get('exam_id'))->with('message', 'Successfully Create');
+		}
+
+	}
+
+	public function delete_question() {
+		$exam = Question::find(Input::get('id'));
+		$exam->delete();
+
+		Redirect::to('view_exam/'. Input::get('exam_id'))
+				->with('message', 'Deleted');
+	}
+
+
 }	
