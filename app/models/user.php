@@ -4,7 +4,7 @@ class User extends Eloquent {
 
 	public static function validate_login($data) {
 		$rules = array(
-			'username' => 'unique:users,username|required',
+			'username' => 'required',
 			'password' => 'required'
 		);
 
