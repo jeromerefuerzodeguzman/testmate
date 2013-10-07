@@ -39,7 +39,7 @@ class CreateQuestionTypesList extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('questiontypes');
+		DB::table('questiontypes')->delete();
 	}
 
 }
