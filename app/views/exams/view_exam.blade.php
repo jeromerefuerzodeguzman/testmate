@@ -9,8 +9,8 @@
 @section('content')
 	<ul class="button-group">
 		<li><a href="#" class="small button">View {{ $exam->title }}</a></li>
-		<li><a href="{{ Request::root() . '/add_set_form/' . $exam->id }}" class="small button">Add Set</a></li>
-		<li><a href="{{ Request::root() . '/add_question_form/' . $exam->id }}" class="small button">Add Question</a></li>
+		<li><a href="{{ Request::root() . '/exam/' . $exam->id. '/set/add'}}" class="small button">Add Set</a></li>
+		<li><a href="{{ Request::root() . '/exam/' . $exam->id . '/question/add' }}" class="small button">Add Question</a></li>
 	</ul>
 	<hr />
 	<div>
@@ -37,7 +37,7 @@
 									<td>{{ $question->answer }}</td>
 									<td>
 										<ul class="button-group radius">
-											<li class="button secondary small"><a href="{{ Request::root() . '/edit_question_form/' . $exam->id . '/' . $question->id}}" ><img style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/edit.png' }} /></a></li>
+											<li class="button secondary small"><a href="{{ Request::root() . '/question/' . $question->id . '/edit'}}" ><img style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/edit.png' }} /></a></li>
 											@if( $question->type->name == 'Multiple Choice')
 											<li class="button secondary small"><a href="{{ Request::root() . '/add_choices_form/' . $exam->id . '/' . $question->id}}" ><img style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/choices.gif' }} /></a></li>
 											@endif

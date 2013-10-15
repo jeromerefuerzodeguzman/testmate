@@ -2,46 +2,46 @@
 
 class ExamController extends BaseController {
 
-	public function view() {
+	public function index() {
 		$list = Exam::all();
 
 		return View::make('exams.view')
 				->with('lists', $list);
 	}
 
-	public function add_form() {
+	public function add() {
 		return View::make('exams.add');
 	}
 
-	public function add() {
+	public function create() {
 		$validation = Exam::validate_new_exam(Input::all());
 
 		if($validation->fails()) {
 			$failed = $validation->failed();
 			return  Redirect::to('add_exam_form')->with('error_index', $failed)->withErrors($validation)->withInput();
 		} else {
-			Exam::create(array(
-					'title' => Input::get('title'),
-					'passing_score' => Input::get('passing_score'),
-					'duration' => Input::get('duration'),
-					'created_at' => date('Y-m-d H:i:s'),
-					'updated_at' => date('Y-m-d H:i:s')
-				));
+			$exam = Exam::create(array(
+				'title' => Input::get('title'),
+				'passing_score' => Input::get('passing_score'),
+				'duration' => Input::get('duration'),
+				'created_at' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s')
+			));
 
-			return Redirect::to('all_exams')->with('message', 'Successfully Create');
+			return Redirect::to('exam/' . $exam->id)->with('message', 'Exam created successfully!');
 		}
 
 	}
 
-	public function delete() {
-		$exam = Exam::find(Input::get('id'));
+	public function delete($id) {
+		$exam = Exam::find($id);
 		$exam->delete();
 
-		Redirect::to('all_exams')
+		return Redirect::to('exams')
 				->with('message', 'Deleted');
 	}
 
-	public function view_settings($id) {
+	public function settings($id) {
 		$exam = Exam::find($id);
 
 		return View::make('exams.settings')
@@ -53,7 +53,7 @@ class ExamController extends BaseController {
 
 		if($validation->fails()) {
 			$failed = $validation->failed();
-			return  Redirect::to('exam_settings/' . Input::get('id'))->with('error_index', $failed)->withErrors($validation)->withInput();
+			return  Redirect::back()->with('error_index', $failed)->withErrors($validation)->withInput();
 		} else {
 			$exam = Exam::find(Input::get('id'));
 			$exam->title = Input::get('title');
@@ -61,12 +61,12 @@ class ExamController extends BaseController {
 			$exam->duration = Input::get('duration');
 			$exam->save();
 
-			return Redirect::to('all_exams')->with('message', 'Successfully Updated');
+			return Redirect::to('/exam/' . $exam->id)->with('message', 'Successfully Updated');
 		}
 
 	}
 
-	public function view_exam($id) {
+	public function show($id) {
 		$exam = Exam::find($id);
 		$sets = Set::where('exam_id', '=', $id)->get(array('id','name'));
 		$questions = Question::where('exam_id', '=', $id)->get();

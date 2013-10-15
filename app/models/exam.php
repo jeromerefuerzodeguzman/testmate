@@ -2,11 +2,17 @@
 
 class Exam extends Eloquent {
 
+	public function sets() {
+        return $this->hasMany('Set');
+    }
+
+
 	protected $fillable = array(
-			'title',
-			'passing_score',
-			'duration'
-		);
+		'title',
+		'passing_score',
+		'duration'
+	);
+
 
 	public static function validate_new_exam($data) {
 		$rules = array(

@@ -10,9 +10,9 @@
 		<li><a href="{{ Request::root() . '/view_exam/' . $exam->id }}" class="small button">Return to {{ $exam->title }}</a></li>
 	</ul>
 	<hr />
-	{{ Form::open(array('url' => 'add_question', 'method' => 'post', 'class' => 'custom')) }}
+	{{ Form::open(array('url' => '/exam/' . $exam->id  . '/question/create', 'method' => 'post', 'class' => 'custom')) }}
 	<div class="row">
-		<div class="large-8 columns">
+		<div class="large-7 columns">
 			<fieldset>
 				<legend>Add Question</legend>
 				<div class="row collapse">
@@ -41,10 +41,10 @@
 				</div>
 				<input type="hidden" name="exam_id" value="{{ $exam-> id }}" />
 			</fieldset>
-			{{ Form::submit('ADD', array('class' => 'button radius')) }}
 		</div>
  		
 	</div>
+	{{ Form::submit('ADD', array('class' => 'button radius')) }}
 	{{ Form::token(); }}
 	{{ Form::close(); }}
 @endsection

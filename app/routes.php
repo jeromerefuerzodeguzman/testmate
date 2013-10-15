@@ -18,25 +18,27 @@ Route::post('authenticate', 'UserController@authenticate');
 
 
 //Exam Routes
-Route::get('all_exams', 'ExamController@view');
-Route::get('add_exam_form', 'ExamController@add_form');
-Route::post('add_exams', 'ExamController@add');
-Route::post('delete_exam', 'ExamController@delete');
-Route::get('exam_settings/{id}', 'ExamController@view_settings');
-Route::post('update_exam_settings', 'ExamController@update_settings');
-Route::get('view_exam/{id}', 'ExamController@view_exam');
+Route::get('/', 'ExamController@index');
+Route::get('exams', 'ExamController@index');
+Route::get('exam/add', 'ExamController@add');
+Route::post('exam/create', 'ExamController@create');
+Route::get('exam/{id}/delete', 'ExamController@delete');
+Route::get('exam/{id}/settings', 'ExamController@settings');
+Route::post('exam/{id}/settings/update', 'ExamController@update_settings');
+Route::get('exam/{id}', 'ExamController@show');
 
 
 //Set Routes
-Route::get('add_set_form/{id}', 'SetController@add_set_form');
-Route::post('add_set', 'SetController@add_set');
+//Route::get('add_set_form/{id}', 'SetController@add_set_form');
+Route::get('exam/{id}/set/add', 'SetController@add');
+Route::post('exam/{id}/set/create', 'SetController@create');
 
 //Question Routes
-Route::get('add_question_form/{id}', 'QuestionController@add_question_form');
-Route::post('add_question', 'QuestionController@add_question');
-Route::post('delete_question', 'QuestionController@delete_question');
-Route::get('edit_question_form/{exam_id}/{question_id}', 'QuestionController@edit_question_form');
-Route::post('edit_question', 'QuestionController@edit_question');
+Route::get('exam/{id}/question/add', 'QuestionController@add');
+Route::post('exam/{id}/question/create', 'QuestionController@create');
+Route::post('exam/{id}/question/delete', 'QuestionController@delete');
+Route::get('question/{id}/edit', 'QuestionController@edit');
+Route::post('question/{id}/edit', 'QuestionController@update');
 
 
 //Choices Routes

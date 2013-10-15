@@ -8,7 +8,7 @@
 @section('content')
 	<div class="row">
 		<div class="large-8 columns">
-			{{ Form::open(array('url' => 'update_exam_settings', 'method' => 'post', 'class' => 'custom')) }}
+			{{ Form::open(array('url' => '/exam/' . $exam->id . '/settings/update', 'method' => 'post', 'class' => 'custom')) }}
 			<fieldset>
 				<legend>Exam Info</legend>
 				<div class="row collapse">

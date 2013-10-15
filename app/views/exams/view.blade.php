@@ -27,14 +27,14 @@
 				<td>{{ $list->passing_score }} %</td>
 				<td>{{ $list->duration }} mins</td>
 				<td style="text-align: center;">
-					<a href="{{ Request::root() . '/view_exam/' . $list->id}}"><img class="view_btn" style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/view.png' }} /></a>
+					<a href="{{ Request::root() . '/exam/' . $list->id}}"><img class="view_btn" style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/view.png' }} /></a>
 				</td>
 				<td style="text-align: center;">
-					<a href="{{ Request::root() . '/exam_settings/' . $list->id}}"><img class="setting_btn" style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/setting.png' }} /></a>
+					<a href="{{ Request::root() . '/exam/' . $list->id . '/settings'}}"><img class="setting_btn" style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/setting.png' }} /></a>
 				</td>
 				<input type="hidden" name="exam_id" value="{{ $list->id }}" ></input>
 				<td style="text-align: center;">
-					<a href=""><img class="delete_btn" style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/delete.png' }} /></a>
+					<a href="{{ Request::root() . '/exam/' . $list->id . '/delete'}}"><img class="delete_btn" style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/delete.png' }} /></a>
 				</td>
 			</tr>
 			@endforeach
@@ -45,19 +45,14 @@
 
 @section('scripts')
 	<script>
-		var BASE = "{{ Request::root() }}";
-
 		$(".delete_btn").click( function() {
-			var id = $(this).closest('tr').find('input[name="exam_id"]').val();
 			var x = confirm("Are you sure?");
 			if (x==true)
 			{
-				$.post(BASE+'/delete_exam', {
-					id: id
-				}, function(data) {
-					location.reload();	
-				});
+				return true;
 			}
+
+			return false;
 		});
 
 

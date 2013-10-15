@@ -6,7 +6,7 @@
 
 
 @section('content')
-	{{ Form::open(array('url' => 'add_exams', 'method' => 'post', 'class' => 'custom')) }}
+	{{ Form::open(array('url' => '/exam/create', 'method' => 'post', 'class' => 'custom')) }}
 	<div class="row">
 		<div class="large-8 columns">
 			<fieldset>
