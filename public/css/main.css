@@ -66,3 +66,7 @@
 }
 
 textarea { height: auto; }
+
+table tr td {
+	font-size: 11px !important;
+}

@@ -52,6 +52,7 @@
 					<h6><small>Copyright 2013 Northstar Solutions Inc.</small></h6>
 				</div>
 			</div>
+			@yield('popups')
 		</div>
 		
 		<!-- Check for Zepto support, load jQuery if necessary -->

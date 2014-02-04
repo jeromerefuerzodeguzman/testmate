@@ -7,57 +7,90 @@
 
 @section('content')
 	<ul class="button-group">
-		<li><a href="{{ Request::root() . '/view_exam/' . $exam->id }}" class="small button">Return to {{ $exam->title }}</a></li>
+		<li><a href="{{ Request::root() . '/exam/' . $exam->id }}" class="small button">Return to {{ $exam->title }}</a></li>
 	</ul>
 	<hr />
 	<div class="row">
-		<div class="large-8 columns">
-			<fieldset>
-				<legend>Question</legend>
-				<div class="row collapse">
-					<p style="font-style: italic; font-weight: bold;"> -- " {{ $question->question }} " </p>
-				</div>
-			</fieldset>
-			<fieldset>
-				<legend>Choices</legend>
-				<table width="428px;">
-					<tr style="text-align: left;">
-						<th width="50px;"></th>
-						<th>Label</th>
-					</tr>
-					@foreach($choices as $choice)
-					<tr>
-						<td> -- </td>
-						<td>{{ $choice->label }}</td>
-					</tr>
-					@endforeach
-				</table>
-			</fieldset>
-			{{ Form::open(array('url' => 'add_choices', 'method' => 'post', 'class' => 'custom')) }}
-			<fieldset>
-				<legend>Add Choices</legend>
-				<div class="row collapse">
-					<div class="small-4 large-3 columns">
-						<span class="prefix">Text:</span>
-					</div>
-					<div class="small-8 large-9 columns">
-						{{ Form::textarea('label', Input::old('label'), array('placeholder' => 'Choice Text')) }}
-					</div>
-				</div>
-				<input type="hidden" name="exam_id" value="{{ $exam-> id }}" />
-				<input type="hidden" name="question_id" value="{{ $question-> id }}" />
-			</fieldset>
-			{{ Form::submit('ADD', array('class' => 'button radius')) }}
+		<div class="large-12 columns">
+			<h4>Question</h4>
+			<h5 class="subheader">{{ $question->question }}</h5>
+			<h5>Choices</h5>
+			<table class="large-6">
+				<?php $letter = 'A'; ?>
+				{{ Form::open(array('url' => 'question/' . $question->id . '/setanswer', 'method' => 'post', 'class' => 'custom', 'id' => 'answer_form')) }}
+				@foreach($choices as $choice)
+				<tr>
+					<td class="large-1">{{ $letter++ }}.</td>
+					<td class="text-justify"><a href="#" data-tooltip data-reveal-id="editModal" class="edit-link" title="Click to edit" id="{{ $choice->id }}">{{ $choice->label }}</a></td>
+					<td class="large-1">
+						{{ Form::radio('answer', $choice->id, $question->answer == $choice->id?true:false) }}
+					</td>
+				</tr>
+				@endforeach
+				{{ Form::close() }}
+			</table>
+			<a href="#" data-reveal-id="myModal" data-reveal>Add</a>
 		</div>
- 		
 	</div>
-	{{ Form::token(); }}
-	{{ Form::close(); }}
 @endsection
 
+@section('popups')
+	<div id="myModal" class="reveal-modal small" data-reveal>
+		<h5>Add Choice</h5>
+		<hr />
+		{{ Form::open(array('url' => 'add_choices', 'method' => 'post', 'class' => 'custom')) }}
+			<div class="row collapse">
+				<div class="large-12 columns">
+					{{ Form::textarea('label', Input::old('label'), array('placeholder' => 'Choice Text')) }}
+				</div>
+			</div>
+			<div class="row collapse">
+				<div class="large-12 columns">
+					{{ Form::submit('Add', array('class' => 'button small')) }}
+				</div>
+			</div>
+			<input type="hidden" name="exam_id" value="{{ $exam->id }}" />
+			<input type="hidden" name="question_id" value="{{ $question->id }}" />
+			{{ Form::token(); }}
+		{{ Form::close(); }}
+	</div>
+
+	<div id="editModal" class="reveal-modal small" data-reveal>
+		<h5>Edit Choice</h5>
+		<hr />
+		{{ Form::open(array('url' => 'choice/update', 'method' => 'post', 'class' => 'custom')) }}
+			<div class="row collapse">
+				<div class="large-12 columns">
+					{{ Form::textarea('label', Input::old('label'), array('id' => 'label', 'placeholder' => 'Choice Text')) }}
+				</div>
+			</div>
+			<div class="row collapse">
+				<div class="large-12 columns">
+					{{ Form::submit('Update', array('class' => 'button small')) }}
+				</div>
+			</div>
+			<input type="hidden" name="exam_id" value="{{ $exam->id }}" />
+			<input type="hidden" name="question_id" value="{{ $question->id }}" />
+			<input type="hidden" name="choice_id" id="choice_id" />
+			{{ Form::token(); }}
+		{{ Form::close(); }}
+	</div>
+@endsection
 
 @section('scripts')
-	<script>
-		
+	<script type="text/javascript">
+        $('.edit-link').click(function(){
+			var id = $(this).attr('id');
+			$('#choice_id').val(id);
+			$('#label').val($(this).html());
+		});
+
+		 $('input:radio').change(function(){
+			$('#answer_form').submit();
+		});
+
+		@if(count($errors)>0)
+			$('#{{ Session::get('from') }}Modal').foundation('reveal', 'open');
+		@endif
 	</script>
 @endsection

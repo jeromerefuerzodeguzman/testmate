@@ -8,9 +8,9 @@ class ChoiceController extends BaseController {
 		$choices = Choice::where('question_id', '=', $question_id)->get();
 
 		return View::make('exams.add_choices')
-				->with('question', $question)
-				->with('exam', $exam)
-				->with('choices', $choices);
+			->with('question', $question)
+			->with('exam', $exam)
+			->with('choices', $choices);
 
 	}
 
@@ -27,6 +27,20 @@ class ChoiceController extends BaseController {
 				));
 
 			return Redirect::to('add_choices_form/' . Input::get('exam_id') . '/' . Input::get('question_id'))->with('message', 'Successfully Create');
+		}
+	}
+
+
+	public function try_update() {
+		$validation = Choice::validate_new_choice(Input::all());
+
+		if($validation->fails()) {
+			$failed = $validation->failed();
+			return  Redirect::to('add_choices_form/' . Input::get('exam_id') . '/' . Input::get('question_id'))->with('error_index', $failed)->withErrors($validation)->withInput();
+		} else {
+			Choice::find(Input::get('choice_id'))->update(array('label' => Input::get('label')));
+
+			return Redirect::to('add_choices_form/' . Input::get('exam_id') . '/' . Input::get('question_id'))->with('message', 'Successfully Updated');
 		}
 	}
 

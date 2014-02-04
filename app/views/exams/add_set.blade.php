@@ -7,7 +7,7 @@
 
 @section('content')
 	<ul class="button-group">
-		<li><a href="{{ Request::root() . '/view_exam/' . $exam->id }}" class="small button">Return to {{ $exam->title }}</a></li>
+		<li><a href="{{ Request::root() . '/exam/' . $exam->id }}" class="small button">Return to {{ $exam->title }}</a></li>
 	</ul>
 	<hr />
 	{{ Form::open(array('url' => '/exam/' . $exam->id . '/set/create', 'method' => 'post', 'class' => 'custom')) }}

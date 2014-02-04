@@ -42,11 +42,11 @@
 					</div>
 				</div>
 			</fieldset>
-			{{ Form::submit('ADD', array('class' => 'button radius')) }}
-			<input type="hidden" value="{{ $exam->id }}" name="id"></input>
+			<input type="hidden" value="{{ $exam->id }}" name="id" />
+			{{ Form::submit('UPDATE', array('class' => 'button radius')) }}
+			<a href="{{ Request::root() . '/exams'}}" class="button radius">BACK</a>
 			{{ Form::token(); }}
 			{{ Form::close(); }}
-			<a href="{{ Request::root() . '/all_exams'}}"><button style="bottom: 79px; left: 90px;" class="button radius">BACK</button></a>
 		</div>
  		
 	</div>

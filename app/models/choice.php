@@ -10,7 +10,6 @@ class Choice extends Eloquent {
 	public static function validate_new_choice($data) {
 		$rules = array(
 			'label' => 'required',
-			
 		);
 
 		return Validator::make($data,$rules);

@@ -61,7 +61,7 @@ class ExamController extends BaseController {
 			$exam->duration = Input::get('duration');
 			$exam->save();
 
-			return Redirect::to('/exam/' . $exam->id)->with('message', 'Successfully Updated');
+			return Redirect::to('/exam/' . $exam->id . '/settings')->with('message', 'Successfully Updated');
 		}
 
 	}
