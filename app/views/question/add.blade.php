@@ -43,6 +43,7 @@
 						{{ Form::textarea('question', Input::old('question'), array('placeholder' => 'Question')) }}
 					</div>
 				</div>
+				@if($type_label == 'Fill in the Blank')
 				<div class="row collapse">
 					<div class="small-4 large-3 columns">
 						<span class="prefix">Answer:</span>
@@ -51,6 +52,7 @@
 						{{ Form::text('answer') }}
 					</div>
 				</div>
+				@endif
 				<input type="hidden" name="exam_id" value="{{ $exam->id }}" />
 			</fieldset>
 		</div>
