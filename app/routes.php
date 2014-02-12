@@ -11,6 +11,15 @@
 |
 */
 
+
+//Applicant Controller
+Route::get('/nsi', 'ApplicantController@index');
+Route::get('/nsiexam/{code}', 'ApplicantController@examquestions');
+Route::post('/codeauth', 'ApplicantController@codeauth');
+Route::post('/answer', 'ApplicantController@answer_update');
+Route::post('/checkanswer', 'ApplicantController@answer_check');
+
+
 //User Routes
 Route::get('admin_login', 'UserController@login');
 Route::any('logout', 'UserController@logout');
