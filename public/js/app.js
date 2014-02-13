@@ -22,7 +22,7 @@ app.config(function($routeProvider){
 app.factory("CodeAuthentication", function($http) {
 	return {
 		login: function(credentials) {
-			return $http.post("/codeauth", credentials);
+			return $http.post("codeauth", credentials);
 		}
 	};
 });
@@ -44,7 +44,7 @@ app.controller("FrontPageController", function($scope, $location, CodeAuthentica
 app.controller("ExamController", function($scope, $routeParams, $http, $location, $timeout) {
 
 	//Gets the question and exams
-	$http.get('/nsiexam/' + $routeParams.code).success( function(data) {
+	$http.get('nsiexam/' + $routeParams.code).success( function(data) {
 		$scope.sets = data.sets;
 		$scope.code = data.code;
 		$scope.applicant_id = data.applicant_id;
@@ -85,7 +85,7 @@ app.controller("ExamController", function($scope, $routeParams, $http, $location
 			'code' : code,
 			'session_id' : session_id
 		};
-		$http.post('/answer', data);
+		$http.post('answer', data);
 	};
 
 
@@ -98,7 +98,7 @@ app.controller("ExamController", function($scope, $routeParams, $http, $location
 			'session_id' : session_id
 
 		};
-		$http.post('/checkanswer', data).success(function() {
+		$http.post('checkanswer', data).success(function() {
 			$location.path('/endexam');
 		});
 	};
