@@ -11,7 +11,11 @@ class Result extends Eloquent {
 			'remark'
 		);
 
-	public static function applicantResult ($data) {
+	public function exam() {
+        return $this->belongsTo('Exam');
+    }
+
+	public static function applicantResult($data) {
 		return Result::create(array(
 			'applicant_id' =>  $data['applicant_id'],
 			'exam_id' => $data['exam_id'],

@@ -26,6 +26,15 @@ class ApplicantsController extends BaseController {
 		return $applicant;
 	}
 
+	//show view applicant info
+	public function view($id) {
+		$applicant = Applicant::find($id);
+		
+		return View::make('applicants.view')
+			->with('applicant', $applicant)
+			->with('exams', $applicant->exams);
+	}
+
 
 
 

@@ -7,6 +7,10 @@
 
 @section('content')
 	<div class="row">
+		<div class="large-10 columns">&nbsp;</div><div class="large-1 columns"><a href="{{ URL::to('exam/' . $exam->id); }}" data-tooltip class="has-tip tip-right" title="Manage question"><i class="general foundicon-tools"></i></a></div><div class="large-1 columns"><a href="{{ URL::to('/exam/' . $exam->id. '/set/add'); }}" data-tooltip class="has-tip tip-right" title="Add new set"><i class="general foundicon-plus"></i></a></div>
+	</div>
+	<hr />
+	<div class="row">
 		<div class="large-8 columns">
 			{{ Form::open(array('url' => '/exam/' . $exam->id . '/settings/update', 'method' => 'post', 'class' => 'custom')) }}
 			<fieldset>
