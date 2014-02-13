@@ -6,9 +6,6 @@
 
 
 @section('content')
-	<div>
-		{{ Form::text('test_onkey_input', '' , array('id' => 'ontest', 'placeholder' => 'Search EXAM here...')) }}
-	</div>
 	<table  width="720px" >
 		<thead>
 			<tr style="font-size: 16px" >

@@ -34,12 +34,16 @@ Route::get('exam/{id}/set/add', 'SetController@add');
 Route::post('exam/{id}/set/create', 'SetController@create');
 
 //Question Routes
-Route::get('exam/{id}/question/add/{type}', 'QuestionController@add');
+Route::get('exam/{id}/question/add/{type}/{set_id}', 'QuestionController@add');
 Route::post('exam/{id}/question/create', 'QuestionController@create');
-Route::post('exam/{id}/question/delete', 'QuestionController@delete');
 Route::get('question/{id}/edit', 'QuestionController@edit');
 Route::post('question/{id}/update', 'QuestionController@update');
 Route::post('question/{id}/setanswer', 'QuestionController@answer');
+Route::get('question/{id}/delete', 'QuestionController@remove');
+
+
+//Applicant Routes
+Route::get('applicants', 'ApplicantsController@index');
 
 
 //Choices Routes

@@ -13,18 +13,15 @@
 	{{ Form::open(array('url' => '/exam/' . $exam->id . '/set/create', 'method' => 'post', 'class' => 'custom')) }}
 	<div class="row">
 		<div class="large-8 columns">
-			<fieldset>
-				<legend>Add Set</legend>
-				<div class="row collapse">
-					<div class="small-4 large-3 columns">
-						<span class="prefix">Set Name:</span>
-					</div>
-					<div class="small-8 large-9 columns">
-						{{ Form::text('name', Input::old('name'), array('placeholder' => 'Name')) }}
-					</div>
+			<div class="row collapse">
+				<div class="small-4 large-3 columns">
+					<span class="prefix">Set Name:</span>
 				</div>
-				<input type="hidden" name="exam_id" value="{{ $exam-> id }}" />
-			</fieldset>
+				<div class="small-8 large-9 columns">
+					{{ Form::text('name', Input::old('name'), array('placeholder' => 'Name')) }}
+				</div>
+			</div>
+			<input type="hidden" name="exam_id" value="{{ $exam-> id }}" />
 			{{ Form::submit('ADD', array('class' => 'button radius')) }}
 		</div>
  		
