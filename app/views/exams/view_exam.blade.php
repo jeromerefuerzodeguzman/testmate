@@ -7,7 +7,10 @@
 
 
 @section('content')
-	
+	<div class="row">
+		<div class="large-11 columns">&nbsp;</div><div class="large-1 columns"><a href="{{ URL::to('/exam/' . $exam->id. '/set/add'); }}" data-tooltip class="has-tip tip-right" title="Add new set"><i class="general foundicon-plus"></i></a></div>
+	</div>
+	<hr />
 	<div class="section-container auto" data-section>
 		@foreach($sets as $set)
 		<?php $ctr = 1; ?>
@@ -21,14 +24,13 @@
 						  <li><a href="{{ Request::root() . '/exam/' . $exam->id . '/question/add/blank/' . $set->id }}">Fill in the Blanks (FB)</a></li>
 						</ul>
 					</li>
-					<li class="right"><a href="{{ Request::root() . '/exam/' . $exam->id. '/set/add'}}" class="small button secondary">Add Set</a></li>
 				</ul>
 				<table class="large-12">
 					<tr>
 						<th class="large-6 text-left">Question</th>
-						<th class="large-1 text-center">Type</th>
+						<th class="large-2 text-center">Type</th>
 						<th class="large-2 text-left">Answer</th>
-						<th class="large-3 text-left">Manage</th>
+						<th class="large-2 text-left">Manage</th>
 					</tr>
 					@foreach($questions as $question)
 						@if($question->set_id == $set->id)
@@ -42,20 +44,16 @@
 										?>
 									</td>
 									<td>
-										<ul class="button-group radius">
-											<li class="button secondary small"><a href="{{ Request::root() . '/question/' . $question->id . '/edit'}}" ><img style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/edit.png' }} /></a></li>
-											<li class="button secondary small"><a href="{{ Request::root() . '/add_choices_form/' . $exam->id . '/' . $question->id}}" ><img style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/choices.gif' }} /></a></li>
-											<li class="button secondary small delete_btn"><input type="hidden" name="question_id" value="{{ $question->id }}" ></input><a href="{{ Request::root() . '/question/' . $question->id . '/delete' }}"><img style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/delete.png' }} /></a></li>
-										</ul>
+										<a href="{{ URL::to('question/'.$question->id.'/edit'); }}" data-tooltip class="has-tip tip-right" title="Edit"><i class="general foundicon-edit"></i></a>
+										<a href="{{ URL::to('add_choices_form/'.$exam->id.'/'. $question->id); }}" data-tooltip class="has-tip tip-right" title="Manage choices"><i class="general foundicon-tools"></i></a>
+										<a href="{{ URL::to('question/'.$question->id.'/delete'); }}" data-tooltip class="has-tip tip-right" title="Delete" class="delete_btn"><i class="general foundicon-trash"></i></a>
 									</td>
 								@elseif($question->type->name == 'Fill in the Blank')
 									<td class="large-1 text-center">FB</td>
 									<td>{{ $question->answer }}</td>
 									<td>
-										<ul class="button-group radius">
-											<li class="button secondary small"><a href="{{ Request::root() . '/question/' . $question->id . '/edit'}}" ><img style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/edit.png' }} /></a></li>
-											<li class="button secondary small delete_btn"><input type="hidden" name="question_id" value="{{ $question->id }}" ></input><a href="{{ Request::root() . '/question/' . $question->id . '/delete' }}" ><img style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/delete.png' }} /></a></li>
-										</ul>
+										<a href="{{ URL::to('question/'.$question->id.'/edit'); }}" data-tooltip class="has-tip tip-right" title="Edit"><i class="general foundicon-edit"></i></a>
+										<a href="{{ URL::to('question/'.$question->id.'/delete'); }}" data-tooltip class="has-tip tip-right" title="Delete" class="delete_btn"><i class="general foundicon-trash"></i></a>
 									</td>
 								@endif
 							</tr>

@@ -53,6 +53,8 @@ Route::get('question/{id}/delete', 'QuestionController@remove');
 
 //Applicant Routes
 Route::get('applicants', 'ApplicantsController@index');
+Route::get('applicant/add', 'ApplicantsController@add');
+Route::post('applicant/create', 'ApplicantsController@create');
 
 
 //Choices Routes

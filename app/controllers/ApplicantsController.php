@@ -10,5 +10,23 @@ class ApplicantsController extends BaseController {
 	}
 
 
+	//show add applicant form
+	public function add() {
+		$exams = Exam::lists('title', 'id');
+		
+		return View::make('applicants.add')
+			->with('exams', $exams);
+	}
+
+
+	//create new applicant
+	public function create() {
+		$applicant = Applicant::try_create(Input::all());
+
+		return $applicant;
+	}
+
+
+
 
 }	

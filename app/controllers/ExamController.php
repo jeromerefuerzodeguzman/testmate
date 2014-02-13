@@ -14,23 +14,9 @@ class ExamController extends BaseController {
 	}
 
 	public function create() {
-		$validation = Exam::validate_new_exam(Input::all());
+		$exam = Exam::try_create(Input::all());
 
-		if($validation->fails()) {
-			$failed = $validation->failed();
-			return  Redirect::to('add_exam_form')->with('error_index', $failed)->withErrors($validation)->withInput();
-		} else {
-			$exam = Exam::create(array(
-				'title' => Input::get('title'),
-				'passing_score' => Input::get('passing_score'),
-				'duration' => Input::get('duration'),
-				'created_at' => date('Y-m-d H:i:s'),
-				'updated_at' => date('Y-m-d H:i:s')
-			));
-
-			return Redirect::to('exam/' . $exam->id)->with('message', 'Exam created successfully!');
-		}
-
+		return $exam;
 	}
 
 	public function delete($id) {

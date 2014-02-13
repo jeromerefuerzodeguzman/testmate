@@ -1,37 +1,32 @@
 @extends('layouts.default')
 
 @section('title')
-	View All Exams
+	Examinations
 @endsection
 
 
 @section('content')
-	<table  width="720px" >
+	<div class="row">
+		<div class="large-11 columns">&nbsp;</div><div class="large-1 columns"><a href="{{ URL::to('exam/add'); }}" data-tooltip class="has-tip tip-right" title="Add new exam"><i class="general foundicon-plus"></i></a></div>
+	</div>
+	<hr />
+	<table class="large-12">
 		<thead>
-			<tr style="font-size: 16px" >
-				<th width="225px">Exam Title</th>
-				<th width="225px">Passing Score</th>
-				<th width="225px">Duration</th>
-				<th width="15px">View</th>
-				<th width="15px">Settings</th>
-				<th width="15px">Delete</th>
+			<tr>
+				<th class="large-6">Title</th>
+				<th class="large-2">Passing Score</th>
+				<th class="large-2">Duration</th>
+				<th class="large-2">Manage</th>
 			</tr>
 		</thead>
 		<tbody>
-			@foreach($lists as $list)
-			<tr onmouseover="mouseOn(this)" onmouseout="mouseOut(this)">
-				<td style="color: #6a0000; font-weight: bold;">{{ $list->title }}</td>
-				<td>{{ $list->passing_score }} %</td>
-				<td>{{ $list->duration }} mins</td>
-				<td style="text-align: center;">
-					<a href="{{ Request::root() . '/exam/' . $list->id}}"><img class="view_btn" style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/view.png' }} /></a>
-				</td>
-				<td style="text-align: center;">
-					<a href="{{ Request::root() . '/exam/' . $list->id . '/settings'}}"><img class="setting_btn" style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/setting.png' }} /></a>
-				</td>
-				<input type="hidden" name="exam_id" value="{{ $list->id }}" ></input>
-				<td style="text-align: center;">
-					<a href="{{ Request::root() . '/exam/' . $list->id . '/delete'}}"><img class="delete_btn" style="cursor: pointer;" width="15px" src={{ Request::root(). '/img/delete.png' }} /></a>
+			@foreach($lists as $exam)
+			<tr>
+				<td><a href="{{ URL::to('exam/'.$exam->id); }}"><h5>{{ $exam->title }}</h5></a></td>
+				<td>{{ $exam->passing_score }}%</td>
+				<td>{{ $exam->duration }} minutes</td>
+				<td><a href="{{ URL::to('exam/'.$exam->id.'/settings'); }}" data-tooltip class="has-tip tip-right" title="Settings"><i class="general foundicon-settings"></i></a>
+					<a href="{{ URL::to('exam/'.$exam->id.'/delete'); }}" data-tooltip class="has-tip tip-right" title="Delete" class="delete_btn"><i class="general foundicon-trash"></i></a>
 				</td>
 			</tr>
 			@endforeach
@@ -51,34 +46,5 @@
 
 			return false;
 		});
-
-
-		function mouseOn(x) {
-				x.style.backgroundColor='#D2E0F5';
-			}
-
-			function mouseOut(x) {
-				x.style.backgroundColor='#FFFFFF';
-			}
-
-			//Filter table 
-			//add index column with all content.
-			$("table tr:has(td)").each(function(){
-				var t = $(this).text().toLowerCase(); //all row text
-				$("<td class='indexColumn'></td>").hide().text(t).appendTo(this);
-			});//each tr
-			$("#ontest").keyup(function(){
-				var s = $(this).val().toLowerCase().split(" ");
-				if(s == "") {
-					$("table tr:hidden").show();
-				} else {
-					//show all rows.
-					$("table tr:hidden").show();
-					$.each(s, function(){
-						$("table tr:visible .indexColumn:not(:contains('"+ this + "'))").parent().hide();
-					});//each
-				}
-				
-			});//key up.
 	</script>
 @endsection

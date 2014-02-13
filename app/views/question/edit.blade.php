@@ -6,18 +6,15 @@
 
 
 @section('content')
-	<?php 
-		//define type
-	?>
-	<ul class="button-group">
-		<li><a href="{{ Request::root() . '/exam/' . $exam->id }}" class="small button">Return to {{ $exam->title }}</a></li>
-	</ul>
+	<div class="row">
+		<div class="large-11 columns">&nbsp;</div><div class="large-1 columns"><a href="{{ URL::to('/exam/' . $exam->id); }}" data-tooltip class="has-tip tip-right" title="Return to {{ $exam->title }}"><i class="general foundicon-left-arrow"></i></a></div>
+	</div>
 	<hr />
 	{{ Form::open(array('url' => '/question/' . $question->id  . '/update', 'method' => 'post', 'class' => 'custom')) }}
 	<div class="row">
 		<div class="large-7 columns">
 			<fieldset>
-				<legend>Add Question</legend>
+				<legend>Question Info</legend>
 				<div class="row collapse">
 					<div class="small-4 large-3 columns">
 						<span class="prefix">Type:</span>
@@ -52,11 +49,17 @@
 					</div>
 				</div>
 				@endif
-				<input type="hidden" name="question_id" value="{{ $question-> id }}" />
+				<div class="row collapse">
+					<div class="large-10 columns">
+					</div>
+					<div class="large-2 columns">
+						{{ Form::submit('DONE', array('class' => 'button secondary small')) }}
+					</div>
+				</div>
 			</fieldset>
 		</div>
 	</div>
-	{{ Form::submit('UPDATE', array('class' => 'button radius')) }}
+	{{ Form::hidden('question_id', $question->id); }}
 	{{ Form::token(); }}
 	{{ Form::close(); }}
 @endsection

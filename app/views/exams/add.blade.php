@@ -41,10 +41,15 @@
 						<span class="prefix">Min</span>
 					</div>
 				</div>
+				<div class="row collapse">
+					<div class="large-10 columns">
+					</div>
+					<div class="large-2 columns">
+						{{ Form::submit('ADD', array('class' => 'button secondary small')) }}
+					</div>
+				</div>
 			</fieldset>
-			{{ Form::submit('ADD', array('class' => 'button radius')) }}
 		</div>
- 		
 	</div>
 	{{ Form::token(); }}
 	{{ Form::close(); }}

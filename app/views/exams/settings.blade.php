@@ -41,10 +41,16 @@
 						<span class="prefix">Min</span>
 					</div>
 				</div>
+				<div class="row collapse">
+					<div class="large-7 columns">
+					</div>
+					<div class="large-5 columns">
+						{{ Form::submit('UPDATE', array('class' => 'button secondary small')) }}
+						<a href="{{ Request::root() . '/exams'}}" class="button secondary small">BACK</a>
+					</div>
+				</div>
 			</fieldset>
 			<input type="hidden" value="{{ $exam->id }}" name="id" />
-			{{ Form::submit('UPDATE', array('class' => 'button radius')) }}
-			<a href="{{ Request::root() . '/exams'}}" class="button radius">BACK</a>
 			{{ Form::token(); }}
 			{{ Form::close(); }}
 		</div>

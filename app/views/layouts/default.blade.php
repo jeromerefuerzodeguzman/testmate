@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
-		<title>TESTM8</title>
+		<title>Nothstart Solutions Inc. Online Examination</title>
 		{{ HTML::style('css/normalize.css') }}
 		{{ HTML::style('css/foundation.css') }}
 		{{ HTML::style('css/main.css') }}
@@ -31,7 +31,7 @@
 			</nav>
 			<div class="row">
 				<div class="large-12 columns">
-					<h1><a href="#">Testm8</a></h1>
+					<h1><a href="#">Online Examination</a></h1>
 				</div>
 			</div>
 			<div class="row">

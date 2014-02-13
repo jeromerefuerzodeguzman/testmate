@@ -1,14 +1,16 @@
 @extends('layouts.default')
 
 @section('title')
-	Add Choices
+	Manage Choices
 @endsection
 
 
 @section('content')
-	<ul class="button-group">
-		<li><a href="{{ Request::root() . '/exam/' . $exam->id }}" class="small button">Return to {{ $exam->title }}</a></li>
-	</ul>
+	<div class="row">
+		<div class="large-10 columns">&nbsp;</div>
+		<div class="large-1 columns"><a href="#" data-tooltip class="has-tip tip-right" title="Add new choice" data-reveal-id="myModal" data-reveal><i class="general foundicon-plus"></i></a></div>
+		<div class="large-1 columns"><a href="{{ URL::to('/exam/' . $exam->id); }}" data-tooltip class="has-tip tip-right" title="Return to {{ $exam->title }}"><i class="general foundicon-left-arrow"></i></a></div>
+	</div>
 	<hr />
 	<div class="row">
 		<div class="large-12 columns">
@@ -29,7 +31,6 @@
 				@endforeach
 				{{ Form::close() }}
 			</table>
-			<a href="#" data-reveal-id="myModal" data-reveal>Add</a>
 		</div>
 	</div>
 @endsection
@@ -46,7 +47,7 @@
 			</div>
 			<div class="row collapse">
 				<div class="large-12 columns">
-					{{ Form::submit('Add', array('class' => 'button small')) }}
+					{{ Form::submit('ADD', array('class' => 'button secondary small')) }}
 				</div>
 			</div>
 			<input type="hidden" name="exam_id" value="{{ $exam->id }}" />
@@ -66,7 +67,7 @@
 			</div>
 			<div class="row collapse">
 				<div class="large-12 columns">
-					{{ Form::submit('Update', array('class' => 'button small')) }}
+					{{ Form::submit('Update', array('class' => 'button secondary small')) }}
 				</div>
 			</div>
 			<input type="hidden" name="exam_id" value="{{ $exam->id }}" />
