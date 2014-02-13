@@ -1,0 +1,56 @@
+
+<div class="row">
+	<div class="large-12 columns text-center">
+        <img style="padding: 20px;" src='img/logo.gif' />
+   	</div>
+	<div class="check-element animate-show" ng-hide="clickme">
+		<div class="large-6 large-centered columns">
+			<fieldset>
+				<legend>Exam Details</legend>
+					<p>Hi <span class="radius alert label">Applicant</span></p>
+					<p>
+						Your exam is <span class="radius alert label">{{ examdetails.title }}</span> consist of different type of questions such as <kbd class="kbd">multiple choice</kbd>, <kbd class="kbd">fill in the blank</kbd>, and <kbd class="kbd">etc</kbd>. The time limit of your test is <span class="radius alert label">{{ examdetails.duration }} mins</span>.
+					</p>
+					<p class="text-center" style="font-weight: bold;">
+						<kbd id="gl">Goodluck :)</kbd>
+					</p>
+			</fieldset>
+			<div class="text-center">
+				<button class="radius button" ng-click="clickme = true;  countdown(examdetails.duration)">Start</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- this div appears after clicking START button -->
+<div class="row">
+	<div ng-show="clickme">
+		<div class="text-center">Time: <span class="radius alert label">{{ counter }} second/s left</span></div>
+		<div style="font-size: 12px;" class="large-12 columns centered" ng-repeat="set in sets">
+			<fieldset>
+				<legend><h3>{{ set.name }}</h3></legend>
+				<div ng-repeat="question in set.questions">
+
+					<div ng-if="question.choices == NULL" >
+						<span style="font-weight: bold;">{{ $index + 1}}.) {{ question.question }}</span>
+						<div class="row">
+							<div style="padding-top: 5px; margin-left: 15px;" class="large-2 columns">
+								<input type="text" name="{{ question.id }}" ng-model="lbl" ng-keyup="updateAns(lbl ,question.id, code, session_id)"/>
+							</div>
+						</div>
+					</div>
+
+					<div ng-if="question.choices != NULL">
+						<span style="font-weight: bold;">{{ $index + 1}}.) {{ question.question }}</span>
+						<div style="padding-top: 5px; margin-left: 25px;" ng-repeat="choice in question.choices" >
+							<input type="radio" name="{{ question.id }}" ng-click="updateAns(choice.label, question.id, code, session_id)" /> {{ choice.label }}
+						</div>
+					</div>
+
+					<br />
+				</div>
+			</fieldset>
+		</div>
+		<div class="text-center"><button class="radius button" ng-click="submitexam(applicant_id, session_id)">Submit</buton></div>
+    </div>
+</div>

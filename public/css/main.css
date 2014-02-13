@@ -70,3 +70,25 @@ textarea { height: auto; }
 table tr td {
 	font-size: 11px !important;
 }
+
+.animate-show.ng-hide-add,
+.animate-show.ng-hide-remove {
+  display:block!important;
+}
+
+.kbd {
+	padding: 0.1875em 0.625em 0.25em;
+	font-family: inherit !important;
+	font-weight: bold !important;
+	background-color: orange;
+	color: white;
+}
+
+#gl {
+	padding: 0.1875em 0.625em 0.25em;
+	font-family: inherit !important;
+	font-weight: bold !important;
+	background-color: blue;
+	color: white;
+}
+

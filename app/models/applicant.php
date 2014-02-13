@@ -4,7 +4,8 @@ class Applicant extends Eloquent {
 
 	protected $fillable = array(
 		'question_id',
-		'label'
+		'label',
+		'name',
+		'code'
 	);
-
 }

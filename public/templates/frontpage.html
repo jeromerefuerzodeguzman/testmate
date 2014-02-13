@@ -1,0 +1,25 @@
+<div class="row">
+	<div class="large-12 columns text-center">
+        <img style="padding: 20px;" src='img/logo.gif' />
+   	</div>
+</div>
+<div class="row">
+	<div class="large-12 columns text-center">
+        <img style="padding: 20px; width: 50%" src='img/img_front.jpg' />
+   	</div>
+</div>
+<div class="row">
+	<div class="large-3 large-centered columns">
+		<form ng-submit="login()">
+			<div class="text-center">
+				{{ flash }}
+				<input type="text" name="code" placeholder="code" ng-model="credentials.code" required/>
+			
+			
+				<button type="submit" class="button radius">
+					Enter Code
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
