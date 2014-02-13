@@ -6,12 +6,12 @@
 
 
 @section('content')
-	<table  width="720px" >
+	<table class="large-12">
 		<thead>
-			<tr style="font-size: 16px" >
-				<th width="225px">Name</th>
-				<th width="225px">Exam</th>
-				<th width="225px">Score</th>
+			<tr>
+				<th class="large-6">Name</th>
+				<th class="large-4">Exam</th>
+				<th class="large-2">Score</th>
 			</tr>
 		</thead>
 		<tbody>
