@@ -8,7 +8,6 @@
 @section('content')
 	<?php 
 		//define type
-		$type_label = $question->type=="multiple"?"Multiple Choice":"Fill in the Blank";
 	?>
 	<ul class="button-group">
 		<li><a href="{{ Request::root() . '/exam/' . $exam->id }}" class="small button">Return to {{ $exam->title }}</a></li>
@@ -24,7 +23,7 @@
 						<span class="prefix">Type:</span>
 					</div>
 					<div class="small-8 large-9 columns">
-						{{ Form::text('type', $type_label, array('disabled' => 'disabled')) }}
+						{{ Form::text('type', $question->type->name, array('disabled' => 'disabled')) }}
 					</div>
 				</div>
 				<div class="row collapse">
@@ -43,6 +42,16 @@
 						{{ Form::textarea('question', $question->question, array('placeholder' => 'Question')) }}
 					</div>
 				</div>
+				@if($question->type->name == 'Fill in the Blank')
+				<div class="row collapse">
+					<div class="small-4 large-3 columns">
+						<span class="prefix">Answer:</span>
+					</div>
+					<div class="small-8 large-9 columns">
+						{{ Form::text('answer', $question->answer) }}
+					</div>
+				</div>
+				@endif
 				<input type="hidden" name="question_id" value="{{ $question-> id }}" />
 			</fieldset>
 		</div>

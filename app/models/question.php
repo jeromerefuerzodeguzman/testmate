@@ -77,6 +77,11 @@ class Question extends Eloquent {
 			$question = Question::find($input['question_id']);
 			$question->question = $input['question'];
 			$question->set_id = $input['set_id'];
+
+			if($question->type->name == 'Fill in the Blank') {
+				$question->answer = $input['answer'];
+			}
+			
 			//$question->answer = $input['answer'];
 			$question->save();
 
@@ -92,5 +97,16 @@ class Question extends Eloquent {
 			$question->save();
 
 			return Redirect::back()->with('message', 'Answer successfully updated');
+	}
+
+	public static function remove($id) {
+		$question = Question::find($id);
+		$question->delete();
+
+		//also delete choices if there's any
+		Choice::where('question_id', '=', $id)->delete();
+
+		return Redirect::back()
+			->with('message', 'Question deleted!');
 	}
 }

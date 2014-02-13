@@ -32,7 +32,7 @@
 						<span class="prefix">Set:</span>
 					</div>
 					<div class="small-8 large-9 columns">
-						{{ Form::select('set_id', $sets) }}
+						{{ Form::select('set_id', $sets, $set_id) }}
 					</div>
 				</div>
 				<div class="row collapse">

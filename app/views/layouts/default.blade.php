@@ -6,7 +6,9 @@
 		{{ HTML::style('css/foundation.css') }}
 		{{ HTML::style('css/main.css') }}
 		{{ HTML::style('css/datepicker.css') }}
+		{{ HTML::style('css/foundation-icons-general/stylesheets/general_foundicons.css') }}
 		{{ HTML::script('js/vendor/custom.modernizr.js') }}
+		
 	</head>
 
 	<body>

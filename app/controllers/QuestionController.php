@@ -2,13 +2,14 @@
 
 class QuestionController extends BaseController {
 
-	public function add($id, $type) {
+	public function add($id, $type, $set_id = 0) {
 		$exam = Exam::find($id);
 		$sets = parent::convert_to_array($exam->sets);
 
 		return View::make('question.add')
 			->with('exam', $exam)
 			->with('sets', $sets)
+			->with('set_id', $set_id)
 			->with('type', $type);
 	}
 	
@@ -41,12 +42,11 @@ class QuestionController extends BaseController {
 		return $question;
 	}
 
-	public function delete_question() {
-		$exam = Question::find(Input::get('id'));
-		$exam->delete();
-
-		Redirect::to('view_exam/'. Input::get('exam_id'))
-			->with('message', 'Deleted');
+	public function remove($id) {
+		$question = Question::remove($id);
+		
+		return $question;
+		
 	}
 
 }	
