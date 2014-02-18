@@ -8,7 +8,7 @@
 
 @section('content')
 	<div class="row">
-		<div class="large-11 columns">&nbsp;</div><div class="large-1 columns"><a href="{{ URL::to('/exam/' . $exam->id. '/set/add'); }}" data-tooltip class="has-tip tip-right" title="Add new set"><i class="general foundicon-plus"></i></a></div>
+		<div class="large-10 columns">&nbsp;</div><div class="large-1 columns"><a href="{{ URL::to('/exam/' . $exam->id. '/set/add'); }}" data-tooltip class="has-tip tip-right" title="Add new set"><i class="general foundicon-plus"></i></a></div><div class="large-1 columns"><a href="{{ URL::to('exam/'.$exam->id.'/settings'); }}" data-tooltip class="has-tip tip-right" title="Settings"><i class="general foundicon-settings"></i></a></div>
 	</div>
 	<hr />
 	<div class="section-container auto" data-section>
@@ -34,8 +34,8 @@
 					</tr>
 					@foreach($questions as $question)
 						@if($question->set_id == $set->id)
-							<tr onmouseover="mouseOn(this)" onmouseout="mouseOut(this)">
-								<td>{{ $ctr }}.) {{ $question->question }}</td>
+							<tr>
+								<td><h5>{{ $ctr }}.) {{ $question->question }}</h5></td>
 								@if($question->type->name == 'Multiple Choice')
 									<td class="large-1 text-center">MC</td>
 									<td>

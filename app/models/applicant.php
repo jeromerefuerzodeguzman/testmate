@@ -8,8 +8,8 @@ class Applicant extends Eloquent {
 		'code'
 	);
 
-	public function exam() {
-        return $this->belongsTo('Exam');
+	public function exams() {
+        return $this->hasMany('Result');
     }
 
 

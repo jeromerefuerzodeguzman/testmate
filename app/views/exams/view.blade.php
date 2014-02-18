@@ -22,7 +22,7 @@
 		<tbody>
 			@foreach($lists as $exam)
 			<tr>
-				<td><a href="{{ URL::to('exam/'.$exam->id); }}"><h5>{{ $exam->title }}</h5></a></td>
+				<td><h5><a href="{{ URL::to('exam/'.$exam->id); }}">{{ $exam->title }}</a></h5></td>
 				<td>{{ $exam->passing_score }}%</td>
 				<td>{{ $exam->duration }} minutes</td>
 				<td><a href="{{ URL::to('exam/'.$exam->id.'/settings'); }}" data-tooltip class="has-tip tip-right" title="Settings"><i class="general foundicon-settings"></i></a>

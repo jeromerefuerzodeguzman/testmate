@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
 
-    <title>TEST</title>
+    <title>Nothstart Solutions Inc. Online Examination</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/foundation.css">
     <link rel="stylesheet" href="css/main.css">
