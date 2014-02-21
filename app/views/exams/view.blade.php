@@ -13,9 +13,10 @@
 	<table class="large-12">
 		<thead>
 			<tr>
-				<th class="large-6">Title</th>
+				<th class="large-4">Title</th>
 				<th class="large-2">Passing Score</th>
 				<th class="large-2">Duration</th>
+				<th class="large-2">Status</th>
 				<th class="large-2">Manage</th>
 			</tr>
 		</thead>
@@ -25,6 +26,7 @@
 				<td><h5><a href="{{ URL::to('exam/'.$exam->id); }}">{{ $exam->title }}</a></h5></td>
 				<td>{{ $exam->passing_score }}%</td>
 				<td>{{ $exam->duration }} minutes</td>
+				<td>{{ $exam->status == '1' ? 'Active' : 'Inactive' }}</td>
 				<td><a href="{{ URL::to('exam/'.$exam->id.'/settings'); }}" data-tooltip class="has-tip tip-right" title="Settings"><i class="general foundicon-settings"></i></a>
 					<a href="{{ URL::to('exam/'.$exam->id.'/delete'); }}" data-tooltip class="has-tip tip-right" title="Delete" class="delete_btn"><i class="general foundicon-trash"></i></a>
 				</td>

@@ -36,11 +36,16 @@
 				<div ng-repeat="question in set.questions">
 
 					<div ng-if="question.choices == NULL" >
-						<span style="font-weight: bold;">{{ $index + 1}}.) {{ question.question }}</span>
-						<div class="row">
-							<div style="padding-top: 5px; margin-left: 15px;" class="large-2 columns">
-								<input type="text" name="{{ question.id }}" ng-model="lbl" ng-keyup="updateAns(lbl ,question.id, code, session_id)"/>
+						<div ng-if="question.type_id == '2'">
+							<span style="font-weight: bold;">{{ $index + 1}}.) {{ question.question }}</span>
+							<div class="row">
+								<div style="padding-top: 5px; margin-left: 15px;" class="large-2 columns">
+									<input type="text" name="{{ question.id }}" ng-model="lbl" ng-keyup="updateAns(lbl ,question.id, code, session_id)"/>
+								</div>
 							</div>
+						</div>
+						<div ng-if="question.type_id == '3'">
+							<center><kbd class="kbd" style="font-size: 13pt; font-weight: bold;">{{ question.question }}</kbd></center>
 						</div>
 					</div>
 

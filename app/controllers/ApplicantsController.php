@@ -12,7 +12,7 @@ class ApplicantsController extends BaseController {
 
 	//show add applicant form
 	public function add() {
-		$exams = Exam::lists('title', 'id');
+		$exams = Exam::where('status', '=', '1')->lists('title', 'id');
 		
 		return View::make('applicants.add')
 			->with('exams', $exams);
