@@ -3,7 +3,7 @@
 	<div class="large-12 columns text-center">
         <img style="padding: 20px;" src='img/logo.gif' />
    	</div>
-	<div class="check-element animate-show" ng-hide="clickme">
+	<div class="animate-show" ng-hide="clickme">
 		<div class="large-6 large-centered columns">
 			<fieldset>
 				<legend>Exam Details</legend>
@@ -16,15 +16,19 @@
 					</p>
 			</fieldset>
 			<div class="text-center">
-				<button class="radius button" ng-click="clickme = true;  countdown(examdetails.duration)">Start</button>
+				<button class="radius button" ng-click="countdown(examdetails.duration)">Start</button>
 			</div>
 		</div>
 	</div>
 </div>
-
+<div id="spinner" ng-hide="loader">
+	<center>
+		<img <img id="img_spinner" alt="" src="img/loader.gif" />
+	</center> 
+</div>
 <!-- this div appears after clicking START button -->
 <div class="row">
-	<div ng-show="clickme">
+	<div class="animate-show" ng-show="clickme">
 		<div class="text-center">Time: <span class="radius alert label">{{ counter }} second/s left</span></div>
 		<div style="font-size: 12px;" class="large-12 columns centered" ng-repeat="set in sets">
 			<fieldset>
@@ -32,11 +36,16 @@
 				<div ng-repeat="question in set.questions">
 
 					<div ng-if="question.choices == NULL" >
-						<span style="font-weight: bold;">{{ $index + 1}}.) {{ question.question }}</span>
-						<div class="row">
-							<div style="padding-top: 5px; margin-left: 15px;" class="large-2 columns">
-								<input type="text" name="{{ question.id }}" ng-model="lbl" ng-keyup="updateAns(lbl ,question.id, code, session_id)"/>
+						<div ng-if="question.type_id == '2'">
+							<span style="font-weight: bold;">{{ $index + 1}}.) {{ question.question }}</span>
+							<div class="row">
+								<div style="padding-top: 5px; margin-left: 15px;" class="large-2 columns">
+									<input type="text" name="{{ question.id }}" ng-model="lbl" ng-keyup="updateAns(lbl ,question.id, code, session_id)"/>
+								</div>
 							</div>
+						</div>
+						<div ng-if="question.type_id == '3'">
+							<center><kbd class="kbd" style="font-size: 13pt; font-weight: bold;">{{ question.question }}</kbd></center>
 						</div>
 					</div>
 

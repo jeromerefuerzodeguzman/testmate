@@ -10,7 +10,8 @@ class Exam extends Eloquent {
 	protected $fillable = array(
 		'title',
 		'passing_score',
-		'duration'
+		'duration',
+		'status'
 	);
 
 
@@ -29,6 +30,7 @@ class Exam extends Eloquent {
 			'title' => 'required',
 			'passing_score' => 'required',
 			'duration' => 'required'
+
 		);
 
 		$validation = Validator::make($inputs, $rules);
@@ -41,7 +43,8 @@ class Exam extends Eloquent {
 			$exam = Exam::create(array(
 				'title' => Input::get('title'),
 				'passing_score' => Input::get('passing_score'),
-				'duration' => Input::get('duration')
+				'duration' => Input::get('duration'),
+				'status' => '1'
 			));
 
 			return Redirect::to('exams')->with('message', 'Exam added successfully');

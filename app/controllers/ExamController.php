@@ -130,5 +130,12 @@ class ExamController extends BaseController {
 				->with('message', 'Deleted');
 	}
 
+	public function update_status($id, $status) {
+		$exam = Exam::find($id);
+		$exam->status = ($status == 'activate' ? '1' : '0');
+		$exam->save();
+
+		return Redirect::to('/exam/' . $exam->id . '/settings')->with('message', 'Successfully Updated');
+	}
 
 }	

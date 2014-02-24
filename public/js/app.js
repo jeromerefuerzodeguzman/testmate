@@ -27,21 +27,36 @@ app.factory("CodeAuthentication", function($http) {
 	};
 });
 
-app.controller("FrontPageController", function($scope, $location, CodeAuthentication) {
+app.controller("FrontPageController", function($scope, $location, CodeAuthentication, $timeout) {
 	$scope.credentials = { code: "" };
-
+	$scope.loader = true;
+	
 	$scope.login = function() {
 		CodeAuthentication.login($scope.credentials).success( function(data) {
 			if(data.code) {
-				$location.path('/nsiexam/code/' + data.code);
+				$scope.loader = false;
+
+				$timeout(function() { 
+					$scope.loader = true;
+					$location.path('/nsiexam/code/' + data.code);
+				}, 2000);
+
+				
 			} else {
-				alert(data.flash);
+				$scope.loader = false;
+				
+				$timeout(function() { 
+					alert(data.flash);
+					$scope.loader = true; 
+				}, 2000);
+				
 			}
 		});
 	};
 });
 
 app.controller("ExamController", function($scope, $routeParams, $http, $location, $timeout) {
+	$scope.loader = true;
 
 	//Gets the question and exams
 	$http.get('nsiexam/' + $routeParams.code).success( function(data) {
@@ -61,19 +76,24 @@ app.controller("ExamController", function($scope, $routeParams, $http, $location
 	
 	//function that activates the answer when start is click
 	$scope.countdown = function(min) {
-		$scope.counter = min * 60;
-		$scope.onTimeout = function(){
-			$scope.counter--;
-			if ($scope.counter > 0) {
-				mytimeout = $timeout($scope.onTimeout,1000);
-			}
-			else {
-				alert("Time is up!");
-				$location.path('/endexam');
-			}
-		}
-		var mytimeout = $timeout($scope.onTimeout,1000);
+		$scope.loader = false;
 
+		$timeout(function() {
+			$scope.clickme = true;
+			$scope.loader = true;
+			$scope.counter = min * 60;
+			$scope.onTimeout = function(){
+				$scope.counter--;
+				if ($scope.counter > 0) {
+					mytimeout = $timeout($scope.onTimeout,1000);
+				}
+				else {
+					alert("Time is up!");
+					$location.path('/endexam');
+				}
+			}
+			var mytimeout = $timeout($scope.onTimeout,1000);
+		}, 2000);
 	}
 
 	//creates or updates answers
@@ -98,9 +118,17 @@ app.controller("ExamController", function($scope, $routeParams, $http, $location
 			'session_id' : session_id
 
 		};
-		$http.post('checkanswer', data).success(function() {
-			$location.path('/endexam');
-		});
+
+		$scope.loader = false;
+		
+		$timeout(function() { 
+			$scope.loader = true;
+			$http.post('checkanswer', data).success(function() {
+				$location.path('/endexam');
+			});
+		}, 2000);
+
+		
 	};
 
 /*	//confirmation when leaving/reloading page

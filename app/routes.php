@@ -13,11 +13,11 @@
 
 
 //Applicant Controller
-Route::get('/nsi', 'ApplicantController@index');
-Route::get('/nsiexam/{code}', 'ApplicantController@examquestions');
-Route::post('/codeauth', 'ApplicantController@codeauth');
-Route::post('/answer', 'ApplicantController@answer_update');
-Route::post('/checkanswer', 'ApplicantController@answer_check');
+Route::get('nsi', 'ApplicantController@index');
+Route::get('nsiexam/{code}', 'ApplicantController@examquestions');
+Route::post('codeauth', 'ApplicantController@codeauth');
+Route::post('answer', 'ApplicantController@answer_update');
+Route::post('checkanswer', 'ApplicantController@answer_check');
 
 
 //User Routes
@@ -35,6 +35,7 @@ Route::get('exam/{id}/delete', 'ExamController@delete');
 Route::get('exam/{id}/settings', 'ExamController@settings');
 Route::post('exam/{id}/settings/update', 'ExamController@update_settings');
 Route::get('exam/{id}', 'ExamController@show');
+Route::any('exam/{id}/{status}', 'ExamController@update_status');
 
 
 //Set Routes
