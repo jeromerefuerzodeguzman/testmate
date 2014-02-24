@@ -22,6 +22,7 @@
 						<ul id="qtypes{{ $set->id }}" class="f-dropdown" data-dropdown-content>
 						  <li><a href="{{ Request::root() . '/exam/' . $exam->id . '/question/add/multiple/' . $set->id }}">Multiple Choice (MC)</a></li>
 						  <li><a href="{{ Request::root() . '/exam/' . $exam->id . '/question/add/blank/' . $set->id }}">Fill in the Blanks (FB)</a></li>
+						  <li><a href="{{ Request::root() . '/exam/' . $exam->id . '/question/add/label/' . $set->id }}">Label (LB)</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -35,8 +36,9 @@
 					@foreach($questions as $question)
 						@if($question->set_id == $set->id)
 							<tr>
-								<td><h5>{{ $ctr }}.) {{ $question->question }}</h5></td>
+								
 								@if($question->type->name == 'Multiple Choice')
+									<td><h5>{{ $ctr }}.) {{ $question->question }}</h5></td>
 									<td class="large-1 text-center">MC</td>
 									<td>
 										<?php $answer = Choice::find($question->answer);
@@ -49,12 +51,22 @@
 										<a href="{{ URL::to('question/'.$question->id.'/delete'); }}" data-tooltip class="has-tip tip-right" title="Delete" class="delete_btn"><i class="general foundicon-trash"></i></a>
 									</td>
 								@elseif($question->type->name == 'Fill in the Blank')
+									<td><h5>{{ $ctr }}.) {{ $question->question }}</h5></td>
 									<td class="large-1 text-center">FB</td>
 									<td>{{ $question->answer }}</td>
 									<td>
 										<a href="{{ URL::to('question/'.$question->id.'/edit'); }}" data-tooltip class="has-tip tip-right" title="Edit"><i class="general foundicon-edit"></i></a>
 										<a href="{{ URL::to('question/'.$question->id.'/delete'); }}" data-tooltip class="has-tip tip-right" title="Delete" class="delete_btn"><i class="general foundicon-trash"></i></a>
 									</td>
+								@elseif($question->type->name == 'Label')
+									<td class="text-center"><h5> {{ $question->question }}</h5></td>
+									<td class="large-1 text-center">LB</td>
+									<td></td>
+									<td>
+										<a href="{{ URL::to('question/'.$question->id.'/edit'); }}" data-tooltip class="has-tip tip-right" title="Edit"><i class="general foundicon-edit"></i></a>
+										<a href="{{ URL::to('question/'.$question->id.'/delete'); }}" data-tooltip class="has-tip tip-right" title="Delete" class="delete_btn"><i class="general foundicon-trash"></i></a>
+									</td>
+									<?php $ctr--; ?>
 								@endif
 							</tr>
 							<?php $ctr++; ?>

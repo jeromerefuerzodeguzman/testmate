@@ -8,7 +8,20 @@
 @section('content')
 	<?php 
 		//define type
-		$type_label = $type=="multiple"?"Multiple Choice":"Fill in the Blank";
+		switch ($type) {
+			case 'blank':
+				$type_label = 'Fill in the Blank';
+				break;
+			case 'multiple':
+				$type_label = 'Multiple Choice';
+				break;
+			case 'label':
+				$type_label = 'Label';
+				break;
+			default:
+				# code...
+				break;
+		}
 	?>
 	<div class="row">
 		<div class="large-11 columns">&nbsp;</div><div class="large-1 columns"><a href="{{ URL::to('/exam/' . $exam->id); }}" data-tooltip class="has-tip tip-right" title="Return to {{ $exam->title }}"><i class="general foundicon-left-arrow"></i></a></div>
@@ -40,7 +53,7 @@
 						<span class="prefix">Text Question:</span>
 					</div>
 					<div class="small-8 large-9 columns">
-						{{ Form::textarea('question', Input::old('question'), array('placeholder' => 'Question')) }}
+						{{ Form::textarea('question', Input::old('question'), array('placeholder' => 'Question/Label')) }}
 					</div>
 				</div>
 				@if($type_label == 'Fill in the Blank')
@@ -65,11 +78,4 @@
 	</div>
 	{{ Form::hidden('exam_id', $exam->id) }}
 	{{ Form::close(); }}
-@endsection
-
-
-@section('scripts')
-	<script>
-		
-	</script>
 @endsection
