@@ -35,7 +35,12 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::guest('login');
+	//if (Auth::guest()) return Redirect::guest('login');
+	if (Auth::guest()) {
+        //Save requested URL in order to redirect afterwards
+        Session::put('redir_url', URL::current());
+        return Redirect::to('admin_login')->with('error', 'Login first.');
+    }
 });
 
 

@@ -25,7 +25,12 @@ class UserController extends BaseController {
 			);
 
 			if (Auth::attempt($credentials)) {
-					return Redirect::to('all_exams');
+					if (Session::get('redir_url')) {
+					$route = explode('http://localhost/testmate/public/', Session::get('redir_url'));
+					return Redirect::to($route[1]);
+				} else {
+					return Redirect::to('/');
+				}
 			} else {
 				return Redirect::to('admin_login')
 		            ->with('flash_error', 'Your username/password was incorrect.')
