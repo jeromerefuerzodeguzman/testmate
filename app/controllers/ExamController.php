@@ -138,4 +138,12 @@ class ExamController extends BaseController {
 		return Redirect::to('/exam/' . $exam->id . '/settings')->with('message', 'Successfully Updated');
 	}
 
+
+	public function results() {
+		$results = Result::orderBy('created_at', 'DESC')->get();
+
+		return View::make('exams.results')
+			->with('results', $results);
+	}
+
 }	

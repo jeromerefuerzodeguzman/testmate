@@ -15,6 +15,11 @@ class Result extends Eloquent {
         return $this->belongsTo('Exam');
     }
 
+    public function applicant() {
+        return $this->belongsTo('Applicant');
+    }
+
+
 	public static function applicantResult($data) {
 		return Result::create(array(
 			'applicant_id' =>  $data['applicant_id'],

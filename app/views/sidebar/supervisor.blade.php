@@ -10,5 +10,8 @@
 	<section  class="<?php echo ($route[1] == 'applicants' OR $route[1] == 'applicant') ? 'active':'';?> ">
 		<p class="title" data-section-title>{{ HTML::link("applicants", "Applicants") }}</p>
 	</section>
+	<section  class="<?php echo ($route[1] == 'results' OR $route[1] == 'result') ? 'active':'';?> ">
+		<p class="title" data-section-title>{{ HTML::link("results", "Results") }}</p>
+	</section>
 </div>
 

@@ -32,6 +32,7 @@ Route::group(array('before' => 'auth'), function() {
 	Route::post('exam/{id}/settings/update', 'ExamController@update_settings');
 	Route::get('exam/{id}', 'ExamController@show');
 	Route::any('exam/{id}/{status}', 'ExamController@update_status');
+	Route::get('results', 'ExamController@results');
 
 
 	//Set Routes
