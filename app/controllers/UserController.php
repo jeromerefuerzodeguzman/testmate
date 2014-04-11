@@ -25,8 +25,9 @@ class UserController extends BaseController {
 			);
 
 			if (Auth::attempt($credentials)) {
-					if (Session::get('redir_url')) {
-					$route = explode('http://localhost/testmate/public/', Session::get('redir_url'));
+				if (Session::get('redir_url')) {
+					$baseURL = URL::to('/');
+					$route = explode($baseURL, Session::get('redir_url'));
 					return Redirect::to($route[1]);
 				} else {
 					return Redirect::to('/');
@@ -34,7 +35,7 @@ class UserController extends BaseController {
 			} else {
 				return Redirect::to('admin_login')
 		            ->with('flash_error', 'Your username/password was incorrect.')
-		            ->withInput();	
+		            ->withInput();
 			}
 
 		}
